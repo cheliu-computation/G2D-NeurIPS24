@@ -1,0 +1,39 @@
+network:
+  decoder: 'yes'
+  img_model: resnet50
+  img_size: 256
+  att_pool_head: 4
+  unet_out_channel: 1
+  text_model: emilyalsentzer/Bio_ClinicalBERT
+  free_layers: 9 # set 12 to freeze all layer in bert
+  feature_dim: 768
+
+  projection_head:
+    mlp_hidden_size: 128
+    projection_size: 128
+  ###
+
+img_path: 'your.npy' # add your image file path here
+text_path: 'your.csv' # add your text file path here
+
+# params for trainer
+# merge_type: 'mean' or 'median' or 'quantil'
+trainer:
+  crop_img_size: 256
+  decoder: 'yes'
+  merge_threshold: 'quantil'
+  quantil: 0.85
+  num_pseudo_map: 1
+  batch_size: 64
+  max_epochs: 51
+  lr: 2.0e-5
+  num_workers: 8
+  test_interval: 2
+
+optimizer:
+  params:
+    lr: 2.0e-5
+    weight_decay: 1.0e-8
+
+# your model name
+wandb_name: 'your_name'
